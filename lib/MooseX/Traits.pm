@@ -59,6 +59,10 @@ sub new_with_traits {
 # need it, write it yourself, but consider applying the roles before
 # you create an instance.
 
+=for Pod::Coverage apply_traits
+
+=cut
+
 sub apply_traits {
     my ($self, $traits, $rebless_params) = @_;
 
@@ -124,7 +128,7 @@ C<with_traits>, and then instantiate that.
 
 There is also C<new_with_traits>, which exists for compatibility
 reasons.  It accepts a C<traits> parameter, creates a new class with
-those traits, and then insantiates it.
+those traits, and then instantiates it.
 
    Class->new_with_traits( traits => [qw/Foo Bar/], foo => 42, bar => 1 )
 
