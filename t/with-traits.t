@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use Test::More tests => 37;
-use Test::Exception;
+use Test::Fatal;
 
 use MooseX::Traits; # for "no warnings ..."
 
@@ -39,9 +39,10 @@ foreach my $trait ( 'Trait', ['Trait' ] ) {
     is $instance->foo, 'hello';
 }
 
-throws_ok {
-    Class->new_with_traits( traits => ['Trait'] );
-} qr/required/, 'foo is required';
+like
+    exception { Class->new_with_traits( traits => ['Trait'] ); },
+    qr/required/,
+    'foo is required';
 
 {
     my $instance = Class->new_with_traits;
@@ -88,9 +89,9 @@ throws_ok {
     isa_ok $instance, 'Class';
     ok !$instance->can('foo');
 
-    lives_ok {
-        $instance->apply_traits('Trait' => { foo => 'bar' } );
-    };
+    is
+        exception { $instance->apply_traits('Trait' => { foo => 'bar' } ); },
+        undef;
 
     isa_ok $instance, 'Class';
     can_ok $instance, 'foo';
@@ -105,10 +106,12 @@ throws_ok {
     ok !$instance->can('foo');
     ok !$instance->can('bar');
 
-    lives_ok {
-        $instance->apply_traits(['Trait', 'Another::Trait']
-                                  => { foo => 'bar', bar => 'baz' } );
-    };
+    is
+        exception {
+            $instance->apply_traits(['Trait', 'Another::Trait']
+                                      => { foo => 'bar', bar => 'baz' } );
+        },
+        undef;
 
     isa_ok $instance, 'Class';
     can_ok $instance, 'foo';

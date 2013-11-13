@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use Test::More;
-use Test::Exception;
+use Test::Fatal;
 
 { package Trait;
   use Moose::Role;
@@ -37,9 +37,10 @@ foreach my $trait ( 'Trait', ['Trait' ] ) {
     is $instance->foo, 'hello';
 }
 
-throws_ok {
-    Class->with_traits('Trait')->new;
-} qr/required/, 'foo is required';
+like
+    exception { Class->with_traits('Trait')->new; },
+    qr/required/,
+    'foo is required';
 
 {
     my $instance = Class->with_traits->new;

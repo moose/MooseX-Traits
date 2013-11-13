@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use Test::More;
-use Test::Exception;
+use Test::Fatal;
 
 use Test::Requires { 'MooseX::Role::Parameterized' => '0.13' };
 
@@ -43,54 +43,68 @@ plan tests => 11;
     with 'MooseX::Traits';
 }
 
-lives_ok {
-    Class->new;
-} 'making class is OK';
+is
+    exception { Class->new; },
+    undef,
+    'making class is OK';
 
-lives_ok {
-    Class->new_with_traits;
-} 'making class with no traits is OK';
+is
+    exception { Class->new_with_traits; },
+    undef,
+    'making class with no traits is OK';
 
 my $a;
 
-lives_ok {
-    $a = Class->new_with_traits(
-        traits => ['PRole' => { foo => 'OHHAI' }],
-        OHHAI  => 'I FIXED THAT FOR YOU',
-    );
-} 'prole is applied OK';
+is
+    exception {
+        $a = Class->new_with_traits(
+            traits => ['PRole' => { foo => 'OHHAI' }],
+            OHHAI  => 'I FIXED THAT FOR YOU',
+        );
+    },
+    undef,
+    'prole is applied OK';
 
 isa_ok $a, 'Class';
 is $a->OHHAI, 'I FIXED THAT FOR YOU', 'OHHAI accessor works';
 
-lives_ok {
-    undef $a;
-    $a = Class->new_with_traits(
-        traits => ['PRole' => { foo => 'OHHAI' }, 'Role'],
-        OHHAI  => 'I FIXED THAT FOR YOU',
-        gorge  => 'three rivers',
-    );
-} 'prole is applied OK along with a normal role';
+is
+    exception {
+        undef $a;
+        $a = Class->new_with_traits(
+            traits => ['PRole' => { foo => 'OHHAI' }, 'Role'],
+            OHHAI  => 'I FIXED THAT FOR YOU',
+            gorge  => 'three rivers',
+        );
+    },
+    undef,
+    'prole is applied OK along with a normal role';
 
 can_ok $a, 'OHHAI', 'gorge';
 
-lives_ok {
-    undef $a;
-    $a = Class->new_with_traits(
-        traits => ['Role', 'PRole' => { foo => 'OHHAI' }],
-        OHHAI  => 'I FIXED THAT FOR YOU',
-        gorge  => 'columbia river',
-    );
-} 'prole is applied OK along with a normal role (2)';
+is
+    exception {
+        undef $a;
+        $a = Class->new_with_traits(
+            traits => ['Role', 'PRole' => { foo => 'OHHAI' }],
+            OHHAI  => 'I FIXED THAT FOR YOU',
+            gorge  => 'columbia river',
+        );
+    },
+    undef,
+    'prole is applied OK along with a normal role (2)';
 
 can_ok $a, 'OHHAI', 'gorge';
 
-lives_ok {
-    undef $a;
-    $a = Class->new_with_traits(
-        traits => ['Role' => { bullshit => 'params', go => 'here' }],
-        gorge  => 'i should have just called this foo',
-    );
-} 'regular roles with args can be applied, but args are ignored';
+is
+    exception {
+        undef $a;
+        $a = Class->new_with_traits(
+            traits => ['Role' => { bullshit => 'params', go => 'here' }],
+            gorge  => 'i should have just called this foo',
+        );
+    },
+    undef,
+    'regular roles with args can be applied, but args are ignored';
 
 can_ok $a, 'gorge';

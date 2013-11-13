@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use Test::More tests => 3;
-use Test::Exception;
+use Test::Fatal;
 
 { package Foo;
   use Moose;
@@ -18,9 +18,12 @@ use Test::Exception;
 }
 
 my $instance;
-lives_ok {
-    $instance = Bar->new_with_traits( traits => ['Trait'] );
-} 'creating instance works ok';
+is
+    exception {
+        $instance = Bar->new_with_traits( traits => ['Trait'] );
+    },
+    undef,
+    'creating instance works ok';
 
 ok $instance->does('Trait'), 'instance does trait';
 is $instance->foo, 42, 'trait works';
