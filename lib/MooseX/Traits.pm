@@ -1,4 +1,5 @@
 package MooseX::Traits;
+# ABSTRACT: automatically apply roles at object creation time
 use Moose::Role;
 
 use MooseX::Traits::Util qw(new_class_with_traits);
@@ -7,9 +8,6 @@ use warnings;
 use warnings::register;
 
 use namespace::autoclean;
-
-our $VERSION   = '0.11';
-our $AUTHORITY = 'id:JROCKWAY';
 
 has '_trait_namespace' => (
     # no accessors or init_arg
@@ -89,9 +87,7 @@ no Moose::Role;
 
 __END__
 
-=head1 NAME
-
-MooseX::Traits - automatically apply roles at object creation time
+=pod
 
 =head1 SYNOPSIS
 
@@ -199,32 +195,4 @@ Example:
   $instance2->does('Trait')          # true
   $instance2->does('Another::Trait') # false
 
-=head1 AUTHORS and CONTRIBUTORS
-
-Jonathan Rockway C<< <jrockway@cpan.org> >>
-
-Stevan Little C<< <stevan.little@iinteractive.com> >>
-
-Tomas Doran C<< <bobtfish@bobtfish.net> >>
-
-Matt S. Trout C<< <mst@shadowcatsystems.co.uk> >>
-
-Jesse Luehrs C<< <doy at tozt dot net> >>
-
-Shawn Moore C<< <sartak@bestpractical.com> >>
-
-Florian Ragwitz C<< <rafl@debian.org> >>
-
-Chris Prather C<< <chris@prather.org> >>
-
-Yuval Kogman C<< <nothingmuch@woobling.org> >>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright 2008 Infinity Interactive, Inc.
-
-L<http://www.iinteractive.com>
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
-
+=cut
