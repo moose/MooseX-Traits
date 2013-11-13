@@ -4,7 +4,6 @@ use Module::Install::AuthorRequires;
 name 'MooseX-Traits';
 all_from 'lib/MooseX/Traits.pm';
 
-requires 'Class::MOP'   => '0.84';
 requires 'Moose'        => '0.84';
 requires 'Moose::Role';
 requires 'Sub::Exporter';

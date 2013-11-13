@@ -6,6 +6,7 @@ use Sub::Exporter -setup => {
     exports => ['new_class_with_traits'],
 };
 
+use Class::Load qw(load_class);
 use Carp qw(confess);
 
 # note: "$class" throughout is "class name" or "instance of class
@@ -46,7 +47,7 @@ sub resolve_traits {
         my $orig = $_;
         if(!ref $orig){
             my $transformed = transform_trait($class, $orig);
-            Class::MOP::load_class($transformed);
+            load_class($transformed);
             $transformed;
         }
         else {
