@@ -1,6 +1,6 @@
 # NAME
 
-MooseX::Traits - automatically apply roles at object creation time
+MooseX::Traits - Automatically apply roles at object creation time
 
 # VERSION
 
@@ -121,6 +121,7 @@ the same terms as the Perl 5 programming language system itself.
 
 # CONTRIBUTORS
 
+- Alexander Hartmaier <abraxxa@cpan.org>
 - Chris Prather <chris@prather.org>
 - Florian Ragwitz <rafl@debian.org>
 - Hans Dieter Pearcey <hdp@weftsoar.net>
