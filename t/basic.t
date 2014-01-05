@@ -10,10 +10,16 @@ use Test::Fatal;
       isa      => 'Str',
       required => 1,
   );
+  sub bar {
+      return 'Trait::bar';
+  }
 
   package Class;
   use Moose;
   with 'MooseX::Traits';
+  sub bar {
+      return 'Class::bar';
+  }
 
   package Another::Trait;
   use Moose::Role;
@@ -35,6 +41,8 @@ foreach my $trait ( 'Trait', ['Trait' ] ) {
     isa_ok $instance, 'Class';
     can_ok $instance, 'foo';
     is $instance->foo, 'hello';
+    is $instance->bar, 'Class::bar',
+        "sub in consuming class doesn't get overridden by sub from role";
 }
 
 like
