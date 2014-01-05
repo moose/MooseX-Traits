@@ -1,5 +1,5 @@
 package MooseX::Traits;
-# ABSTRACT: automatically apply roles at object creation time
+# ABSTRACT: Automatically apply roles at object creation time
 use Moose::Role;
 
 use MooseX::Traits::Util qw(new_class_with_traits);
