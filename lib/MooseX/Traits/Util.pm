@@ -6,8 +6,8 @@ use Sub::Exporter -setup => {
     exports => ['new_class_with_traits'],
 };
 
-use Class::Load qw(load_class);
-use Carp qw(confess);
+use Class::Load ();
+use Carp ();
 
 # note: "$class" throughout is "class name" or "instance of class
 # name"
@@ -15,7 +15,7 @@ use Carp qw(confess);
 sub check_class {
     my $class = shift;
 
-    confess "We can't interact with traits for a class ($class) ".
+    Carp::confess "We can't interact with traits for a class ($class) ".
       "that does not do MooseX::Traits" unless $class->does('MooseX::Traits');
 }
 
@@ -47,7 +47,7 @@ sub resolve_traits {
         my $orig = $_;
         if(!ref $orig){
             my $transformed = transform_trait($class, $orig);
-            load_class($transformed);
+            Class::Load::load_class($transformed);
             $transformed;
         }
         else {
