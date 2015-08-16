@@ -1,6 +1,7 @@
 Revision history for MooseX-Traits
 
 {{$NEXT}}
+        - update some distribution tooling
 
 0.12      2013-11-13 07:21:32Z
         - removed use of deprecated Class::MOP::load_class
