@@ -1,4 +1,6 @@
 /.ackrc
 /.build/
-!.gitignore
-/MooseX-Traits-*
+!/.gitignore
+/.latest
+/MooseX-Traits-*/
+/MooseX-Traits-*.tar.gz
