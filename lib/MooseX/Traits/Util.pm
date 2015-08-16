@@ -2,7 +2,7 @@ package MooseX::Traits::Util;
 use strict;
 use warnings;
 
-our $VERSION = '0.13';
+our $VERSION = '0.14';
 
 use Sub::Exporter -setup => {
     exports => ['new_class_with_traits'],
