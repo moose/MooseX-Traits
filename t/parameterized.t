@@ -3,7 +3,7 @@ use warnings;
 use Test::More;
 use Test::Fatal;
 
-use Test::Requires { 'MooseX::Role::Parameterized' => '0.13' };
+use Test::Needs { 'MooseX::Role::Parameterized' => '0.13' };
 
 plan tests => 11;
 
