@@ -81,6 +81,9 @@ sub new_class_with_traits {
 }
 
 1;
+__END__
+
+=pod
 
 =for Pod::Coverage check_class new_class_with_traits resolve_traits transform_trait
 
